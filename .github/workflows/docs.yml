@@ -51,7 +51,7 @@ jobs:
           git config --global core.ignorecase false
 
           DEPLOY_SOURCE=${PWD}/Docs/build/html
-          DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
+          DEPLOY_SOURCE_HEAD=$(git rev-parse --short HEAD)
           cd ..
           echo "git clone AMReX-Codes.github.io"
           git clone --depth=1 -b main git@github.com:AMReX-Codes/AMReX-Codes.github.io
