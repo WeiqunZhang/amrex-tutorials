@@ -34,7 +34,8 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.DEPLOY_KEY }}
         run: |
-          # Configure SSH
+          # https://blog.benoitblanchon.fr/github-action-run-ssh-commands/
+          echo "Configure SSH"
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
@@ -44,15 +45,24 @@ jobs:
             StrictHostKeyChecking no
           END
 
-          # Configure git
-          git config --global user.name WeiqunZhang
-          git config --global user.email WeiqunZhang@lbl.gov
+          echo "Configure git"
+          git config --global user.name `git log -1 --pretty=format:'%an'`
+          git config --global user.email `git log -1 --pretty=format:'%ae'`
           git config --global core.ignorecase false
 
           DEPLOY_SOURCE=${PWD}/Docs/build/html
           DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
           cd ..
-          git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
+          echo "git clone AMReX-Codes.github.io"
+          git clone --depth=1 -b main git@github.com:AMReX-Codes/AMReX-Codes.github.io
           cd AMReX-Codes.github.io/amrex/tutorials_html/
-          ls
-          ls ${DEPLOY_SOUrCE}
+          rsync -q -av --checksum --progress ${DEPLOY_SOURCE}/. .
+          git add --all .
+          if [ -n "$(git status --procelain)" ]; then
+            git commit -m "Deoploying from amrex-tutorials ${DEPLOY_SOURCE_HEAD}" --no-verify
+            echo "git push to AMReX-Codes.github.io"
+            git --no-pager show HEAD
+            echo "Successfully completed deployment"
+          else
+            echo "No changes to deploy"
+          fi
