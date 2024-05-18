@@ -32,9 +32,6 @@ jobs:
       - name: Deploy
         if: github.event_name == 'push' && github.repository == 'WeiqunZhang/amrex-tutorials' && github.ref == 'refs/heads/deploy'
         run: |
-          ls Docs/
-          ls Docs/build
-          ls Docs/build/html
           DEPLOY_SOURCE=${PWD}/Docs/build/html
           DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
 
@@ -42,10 +39,9 @@ jobs:
 
           # Configure SSH client
 
-          git config -l
-          git config user.name WeiqunZhang
-          git config user.email WeiqunZhang@lbl.gov
-          git config core.ignorecase false
+          git config --global user.name WeiqunZhang
+          git config --global user.email WeiqunZhang@lbl.gov
+          git config --global core.ignorecase false
           git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
           cd AMReX-Codes.github.io/amrex/tutorials_html/
           ls
