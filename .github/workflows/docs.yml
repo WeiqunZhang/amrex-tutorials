@@ -31,32 +31,28 @@ jobs:
 
       - name: Deploy
         if: github.event_name == 'push' && github.repository == 'WeiqunZhang/amrex-tutorials' && github.ref == 'refs/heads/deploy'
-        steps:
-          - name: Configure SSH
-            run: |
-              mkdir -p ~/.ssh/
-              echo "$SSH_KEY" > ~/.ssh/deploy_key
-              chmod 600 ~/.ssh/deploy_key
-              cat >>~/.ssh/config <<END
-              Host *
-                IdentityFile ~/.ssh/deploy_key
-                StrictHostKeyChecking no
-              END
-            env:
-              SSH_KEY: ${{ secrets.DEPLOY_KEY }}
-          - name: Configure git
-            run: |
-              git config --global user.name WeiqunZhang
-              git config --global user.email WeiqunZhang@lbl.gov
-              git config --global core.ignorecase false
-          - name: Deploy to AMReX-Codes.github.io
-            run: |
-              DEPLOY_SOURCE=${PWD}/Docs/build/html
-              DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          # Configure SSH
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat >>~/.ssh/config <<END
+          Host *
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking no
+          END
 
-              cd ..
+          # Configure git
+          git config --global user.name WeiqunZhang
+          git config --global user.email WeiqunZhang@lbl.gov
+          git config --global core.ignorecase false
 
-              #git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
-              #cd AMReX-Codes.github.io/amrex/tutorials_html/
-              #ls
-              #ls ${DEPLOY_SOUrCE}
+          DEPLOY_SOURCE=${PWD}/Docs/build/html
+          DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
+          cd ..
+          git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
+          cd AMReX-Codes.github.io/amrex/tutorials_html/
+          ls
+          ls ${DEPLOY_SOUrCE}
