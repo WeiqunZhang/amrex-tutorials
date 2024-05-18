@@ -37,5 +37,5 @@ jobs:
           repository-name: AMReX-Codes/AMReX-Codes.github.io
           branch: main # The branch the action should deploy to.
           folder: Docs/build/html # The folder the action should deploy.
-          target_folder: amrex/tutorials_html # The folder the action should deploy to.
+          target-folder: amrex/tutorials_html # The folder the action should deploy to.
           clean: false # Do not remove existing files from the deploy target.
