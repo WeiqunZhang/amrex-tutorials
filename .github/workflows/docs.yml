@@ -31,20 +31,32 @@ jobs:
 
       - name: Deploy
         if: github.event_name == 'push' && github.repository == 'WeiqunZhang/amrex-tutorials' && github.ref == 'refs/heads/deploy'
-        run: |
-          DEPLOY_SOURCE=${PWD}/Docs/build/html
-          DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
+        steps:
+          - name: Configure SSH
+            run: |
+              mkdir -p ~/.ssh/
+              echo "$SSH_KEY" > ~/.ssh/deploy_key
+              chmod 600 ~/.ssh/deploy_key
+              cat >>~/.ssh/config <<END
+              Host *
+                IdentityFile ~/.ssh/deploy_key
+                StrictHostKeyChecking no
+              END
+            env:
+              SSH_KEY: ${{ secrets.DEPLOY_KEY }}
+          - name: Configure git
+            run: |
+              git config --global user.name WeiqunZhang
+              git config --global user.email WeiqunZhang@lbl.gov
+              git config --global core.ignorecase false
+          - name: Deploy to AMReX-Codes.github.io
+            run: |
+              DEPLOY_SOURCE=${PWD}/Docs/build/html
+              DEPLOY_SOURCE_HEAD=`git rev-parse --short HEAD`
 
-          cd ..
+              cd ..
 
-          # Configure SSH client
-
-          git config --global user.name WeiqunZhang
-          git config --global user.email WeiqunZhang@lbl.gov
-          git config --global core.ignorecase false
-          git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
-          cd AMReX-Codes.github.io/amrex/tutorials_html/
-          ls
-          ls ${DEPLOY_SOUrCE}
-
-
+              #git clone git@github.com:AMReX-Codes/AMReX-Codes.github.io
+              #cd AMReX-Codes.github.io/amrex/tutorials_html/
+              #ls
+              #ls ${DEPLOY_SOUrCE}
