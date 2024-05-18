@@ -1,5 +1,10 @@
 name: Build and Deploy
 on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.head_ref }}-docs
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -25,7 +30,7 @@ jobs:
           make html
 
       - name: Deploy
-        if: github.event_name == 'push' && github.repository == 'AMReX-Codes/amrex-tutorials' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.repository == 'AMReX-Codes/amrex-tutorials' && github.ref == 'refs/heads/development'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           ssh-key: ${{ secrets.DEPLOY_KEY }}
