@@ -64,6 +64,6 @@ jobs:
             git --no-pager show HEAD
             echo "Successfully completed deployment"
           else
-            git --config -l
+            git config -l
             echo "No changes to deploy"
           fi
