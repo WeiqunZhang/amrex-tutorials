@@ -1,0 +1,2 @@
+add_subdirectory(StaticHierarchy)
+add_subdirectory(AdvectionAmrCore)

@@ -1,9 +1,159 @@
-This repository contains tutorials built using the AMReX adaptive
-mesh refinement framework, available at: https://github.com/AMReX-Codes/amrex/
+# AMReX Tutorials
 
-Corresponding documentation for these tutorials is available at:
-https://amrex-codes.github.io/amrex/tutorials_html/
+Tutorials for [AMReX](https://github.com/AMReX-Codes/amrex), a software
+framework for block-structured adaptive mesh refinement. The tutorials are
+organized by topic and range from introductory examples to complete codes
+meant as starting points for new applications. Every tutorial runs on CPUs
+and GPUs, with MPI and OpenMP, and builds with CMake or GNU Make.
 
+Documentation: https://amrex-codes.github.io/amrex/tutorials_html/
+
+## Building
+
+With CMake, from the top of this repository (AMReX is downloaded and built
+as part of the tutorials):
+
+```
+cmake -S . -B build
+cmake --build build -j
+ctest --test-dir build
+```
+
+Useful options:
+
+| Option | Meaning |
+|---|---|
+| `-DAMReXTutorials_TOPICS="Base;FFT"` | Build only some topics |
+| `-DAMReX_SPACEDIM=2` | Build for 1, 2 or 3 dimensions (default 3) |
+| `-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=80` | GPU build (also `HIP`, `SYCL`) |
+| `-DAMReX_OMP=ON`, `-DAMReX_MPI=OFF` | OpenMP on, MPI off |
+| `-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex` | Use a local AMReX source tree |
+| `-DAMReX_ROOT=/path/to/install` | Use an installed AMReX |
+| `-DAMReX_SUNDIALS=ON` | Build the SUNDIALS tutorial (SUNDIALS is downloaded) |
+| `-DAMReXTutorials_PYTHON=ON` | Test the pyAMReX tutorials |
+| `-DAMReXTutorials_TORCH=ON` | Build the PyTorch tutorial (needs LibTorch) |
+
+A single tutorial is built with its target, `<Topic>_<Name>`, e.g.,
+`cmake --build build --target Base_HeatEquation`.
+
+With GNU Make, clone AMReX next to this repository (or set `AMREX_HOME`)
+and run `make -j` in a tutorial directory. See each tutorial's README.
+
+To set up your own project, see [BuildSystems](BuildSystems).
+
+## Catalog
+
+Levels: ★ introductory, ★★ intermediate, ★★★ advanced, **Blueprint** a
+complete code to copy as the starting point of an application.
+
+### Base: core data structures, kernels and I/O
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [HelloWorld](Base/HelloWorld) | ★ | Initialize AMReX, print, read a parameter |
+| [ParmParse](Base/ParmParse) | ★ | Runtime parameters: arrays, expressions, enums, tables, sections |
+| [MultiFab](Base/MultiFab) | ★ | `BoxArray`, `DistributionMapping`, `Geometry`, `MultiFab`, `ParallelFor`, `MFIter`, plotfiles |
+| [HeatEquation](Base/HeatEquation) | ★ | Explicit heat equation on a periodic domain |
+| [BoundaryConditions](Base/BoundaryConditions) | ★★ | Physical boundary conditions with `BCRec` and `PhysBCFunct` |
+| [CheckpointRestart](Base/CheckpointRestart) | ★★ | Checkpoint, restart, and reading plotfiles back |
+| [Reductions](Base/Reductions) | ★★ | `ReduceOps`, `ParReduce`, `Reducer`, MultiFab norms, MPI reductions |
+| [GpuContainers](Base/GpuContainers) | ★★ | Device/pinned vectors, async copies, prefix sums, random numbers, arenas |
+| [Parser](Base/Parser) | ★★ | Functions defined at runtime and evaluated in GPU kernels |
+| [CompileTimeOptions](Base/CompileTimeOptions) | ★★★ | Specialized kernels from runtime options |
+| [ExternalMPI](Base/ExternalMPI) | ★★ | AMReX on a communicator owned by the application |
+
+### FFT: `amrex::FFT` transforms and solvers
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [Basic](FFT/Basic) | ★ | Real-to-complex transforms, spectral derivative and filter |
+| [Poisson](FFT/Poisson) | ★★ | `FFT::Poisson` (periodic, Dirichlet, Neumann) and `FFT::PoissonHybrid` |
+| [OpenBC](FFT/OpenBC) | ★★ | Free-space Poisson solver |
+| [EnergySpectrum](FFT/EnergySpectrum) | ★★ | Kinetic energy spectrum with batched FFTs |
+
+### LinearSolvers: multigrid and Krylov solvers
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [CellPoisson](LinearSolvers/CellPoisson) | ★ | `MLPoisson` and `MLMG` basics |
+| [ABecLaplacian](LinearSolvers/ABecLaplacian) | ★★ | Variable coefficients, multi-level composite solve |
+| [ImplicitHeat](LinearSolvers/ImplicitHeat) | ★★ | Backward Euler heat equation, reusing a solver |
+| [NodalProjection](LinearSolvers/NodalProjection) | ★★ | `MLNodeLaplacian` velocity projection |
+| [GMRES](LinearSolvers/GMRES) | ★★ | GMRES with a multigrid preconditioner |
+| [CurlCurl](LinearSolvers/CurlCurl) | ★★★ | `MLCurlCurl` for edge-centered fields |
+| [CustomLinOp](LinearSolvers/CustomLinOp) | ★★★ | Writing your own multigrid operator |
+
+### AMR: adaptive mesh refinement with `AmrCore`
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [StaticHierarchy](AMR/StaticHierarchy) | ★★ | FillPatch, average down and refluxing on a fixed hierarchy |
+| [AdvectionAmrCore](AMR/AdvectionAmrCore) | ★★★ / Blueprint | Complete AMR code: tagging, regridding, subcycling, checkpoints |
+
+### EB: embedded boundaries
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [Geometry](EB/Geometry) | ★ | Implicit functions, CSG, parser and STL geometries |
+| [Poisson](EB/Poisson) | ★★ | `MLEBABecLap` with Dirichlet conditions on the EB |
+| [Advection](EB/Advection) | ★★★ | Cut-cell advection with redistribution |
+
+### Particles
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [Basics](Particles/Basics) | ★ | Pure SoA container, push, redistribute, reductions, I/O |
+| [ParticleMesh](Particles/ParticleMesh) | ★★ | Deposition and gather |
+| [Sorting](Particles/Sorting) | ★★ | Binning, sorting, partitioning, filtering |
+| [NeighborList](Particles/NeighborList) | ★★★ | Molecular dynamics with neighbor lists |
+| [ElectrostaticPIC](Particles/ElectrostaticPIC) | ★★★ / Blueprint | Particle-in-cell code |
+
+### TimeIntegration
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [RungeKutta](TimeIntegration/RungeKutta) | ★★ | `TimeIntegrator` with Runge-Kutta methods |
+| [SUNDIALS](TimeIntegration/SUNDIALS) | ★★★ | Explicit, implicit, IMEX and multirate methods from SUNDIALS |
+
+### Coupling
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [ForkJoin](Coupling/ForkJoin) | ★★ | Running tasks concurrently on subsets of ranks |
+| [MPMD](Coupling/MPMD) | ★★★ | Coupling two programs (C++ or Python) in one MPI job |
+
+### Python (pyAMReX)
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [MultiFab](Python/MultiFab) | ★ | MultiFabs with NumPy/CuPy views |
+| [HeatEquation](Python/HeatEquation) | ★ | Heat equation written in Python |
+
+### ML
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [PyTorchInference](ML/PyTorchInference) | ★★★ | Evaluating a PyTorch model on MultiFab data |
+
+### Applications: complete codes
+
+| Tutorial | Level | What it shows |
+|---|---|---|
+| [CNS](Applications/CNS) | Blueprint | Compressible flow on `Amr`/`AmrLevel` with GPU support |
+
+### BuildSystems: your own project
+
+| Example | What it shows |
+|---|---|
+| [CMakeSuperbuild](BuildSystems/CMakeSuperbuild) | AMReX built with the project via `FetchContent` |
+| [CMakeInstalledAMReX](BuildSystems/CMakeInstalledAMReX) | Linking to an installed AMReX with `find_package` |
+| [GNUMake](BuildSystems/GNUMake) | A GNU Make project with `Source/` and `Exec/` |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
 
 NOTICE.  This Software was developed under funding from the
 U.S. Department of Energy and the U.S. Government consequently retains
