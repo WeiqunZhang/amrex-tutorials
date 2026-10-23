@@ -32,7 +32,7 @@ Requires MPI. CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Coupling
-cmake --build build --target Coupling_MPMD_Main Coupling_MPMD_Agent -j
+cmake --build build --target Coupling_MPMD_Main Coupling_MPMD_Agent -j 8
 cd build/Coupling/MPMD
 mpiexec -n 2 ./MPMD_Main inputs : -n 2 ./MPMD_Agent inputs
 ```
@@ -40,8 +40,8 @@ mpiexec -n 2 ./MPMD_Main inputs : -n 2 ./MPMD_Agent inputs
 GNU Make builds one program at a time, selected with `PROG`:
 
 ```
-make -j PROG=main
-make -j PROG=agent
+make -j8 PROG=main
+make -j8 PROG=agent
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs : -n 2 ./agent3d.gnu.TPROF.MPI.ex inputs
 ```
 
@@ -53,6 +53,10 @@ mpiexec -n 2 ./MPMD_Main inputs : -n 2 python3 agent.py inputs
 ```
 
 The CTest tests run with `-DAMReXTutorials_PYTHON=ON` include the Python agent.
+
+If `mpiexec` itself crashes on the two-program command line (seen with Open
+MPI 5 and PMIx 5.0.9 on Ubuntu), set `PMIX_MCA_pmdl=^ompi` in the environment.
+The CTest tests do this automatically when needed.
 
 ## Expected output
 
