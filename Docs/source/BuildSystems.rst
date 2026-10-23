@@ -37,7 +37,7 @@ Build and run:
    mpiexec -n 2 ./build/MyApp
 
 - AMReX options, e.g., ``-DAMReX_SPACEDIM=2 -DAMReX_OMP=ON -DAMReX_EB=ON``.
-- GPU: ``-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=80``, or
+- GPU: ``-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=native``, or
   ``HIP`` with ``-DAMReX_AMD_ARCH=gfx90a``, or ``SYCL`` with Intel's
   ``icpx`` compiler.
 - A local AMReX source tree instead of a download:

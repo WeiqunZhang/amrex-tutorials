@@ -25,7 +25,7 @@ Useful options:
 |---|---|
 | `-DAMReXTutorials_TOPICS="Base;FFT"` | Build only some topics |
 | `-DAMReX_SPACEDIM=2` | Build for 1, 2 or 3 dimensions (default 3) |
-| `-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=80` | GPU build (also `HIP`, `SYCL`) |
+| `-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=native` | GPU build (also `HIP`, `SYCL`) |
 | `-DAMReX_OMP=ON`, `-DAMReX_MPI=OFF` | OpenMP on, MPI off |
 | `-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex` | Use a local AMReX source tree |
 | `-DAMReX_ROOT=/path/to/install` | Use an installed AMReX |
