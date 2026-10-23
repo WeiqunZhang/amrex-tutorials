@@ -12,14 +12,8 @@ file(COPY agent.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 find_package(MPI REQUIRED COMPONENTS CXX)
 set(_main ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2 ${MPIEXEC_PREFLAGS}
     $<TARGET_FILE:Coupling_MPMD_Main> inputs)
-set(_agent_args inputs)
-if(AMReX_GPU_BACKEND STREQUAL "NONE")
-    list(APPEND _main amrex.fpe_trap_invalid=1 amrex.fpe_trap_zero=1 amrex.fpe_trap_overflow=1)
-else()
-    # Four ranks share the GPU, so start with small memory arenas.
-    list(APPEND _main amrex.the_arena_init_size=268435456)
-    list(APPEND _agent_args amrex.the_arena_init_size=268435456)
-endif()
+list(APPEND _main ${AMReXTutorials_TEST_ARGS})
+set(_agent_args inputs ${AMReXTutorials_TEST_ARGS})
 
 # Some launchers crash on a multi-program command line (Open MPI 5 with
 # Ubuntu's PMIx 5.0.9 segfaults in PMIx_Setenv). Probe with a no-op program

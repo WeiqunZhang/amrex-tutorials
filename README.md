@@ -29,6 +29,7 @@ Useful options:
 | `-DAMReX_OMP=ON`, `-DAMReX_MPI=OFF` | OpenMP on, MPI off |
 | `-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex` | Use a local AMReX source tree |
 | `-DAMReX_ROOT=/path/to/install` | Use an installed AMReX |
+| `-DAMReX_TESTING=ON` | Trap floating-point exceptions in the tests |
 | `-DAMReX_SUNDIALS=ON` | Build the SUNDIALS tutorial (SUNDIALS is downloaded) |
 | `-DAMReXTutorials_PYTHON=ON` | Test the pyAMReX tutorials |
 | `-DAMReXTutorials_TORCH=ON` | Build the PyTorch tutorial (needs LibTorch) |

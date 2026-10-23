@@ -63,6 +63,8 @@ Options
      - Use a local AMReX source tree instead of downloading it
    * - ``-DAMReX_ROOT=/path/to/install``
      - Use an installed AMReX
+   * - ``-DAMReX_TESTING=ON``
+     - Trap floating-point exceptions in the tests
    * - ``-DAMReX_SUNDIALS=ON``
      - Build the :ref:`SUNDIALS <timeintegration-sundials>` tutorial
        (SUNDIALS is downloaded unless ``SUNDIALS_ROOT`` is given)
@@ -86,7 +88,8 @@ Each tutorial is registered as a CTest test that runs it with its
 reference answer check it and return a non-zero exit code if the error is
 too large. On CPUs, the tests trap floating-point exceptions
 (``amrex.fpe_trap_invalid=1 amrex.fpe_trap_zero=1
-amrex.fpe_trap_overflow=1``).
+amrex.fpe_trap_overflow=1``) when AMReX is built with ``-DAMReX_TESTING=ON``
+or ``-DAMReX_FPE=ON``.
 
 .. code-block:: console
 

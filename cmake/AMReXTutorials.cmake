@@ -11,6 +11,20 @@
 # the parent directory, and registers a CTest test that runs it.  The tutorial
 # is skipped if a required feature or the current dimension is unavailable.
 
+# Extra arguments for the tests. On CPU, trap floating-point exceptions when
+# AMReX is built for testing (AMReX_TESTING or AMReX_FPE); those options also
+# keep clang from raising exceptions in unused SIMD lanes. On GPU, start with
+# a small memory arena (it grows as needed) so that several ranks can share a
+# device.
+if(NOT AMReX_GPU_BACKEND STREQUAL "NONE")
+    set(AMReXTutorials_TEST_ARGS amrex.the_arena_init_size=268435456)
+elseif(AMReX_TESTING OR AMReX_FPE)
+    set(AMReXTutorials_TEST_ARGS
+        amrex.fpe_trap_invalid=1 amrex.fpe_trap_zero=1 amrex.fpe_trap_overflow=1)
+else()
+    set(AMReXTutorials_TEST_ARGS)
+endif()
+
 function(_amrex_tutorial_has_feature _feature _out)
     set(_has OFF)
     if(_feature STREQUAL "EB")
@@ -92,15 +106,7 @@ function(amrex_tutorial_add _name)
         list(GET _arg_INPUTS 0 _first_input)
         cmake_path(GET _first_input FILENAME _test_args)
     endif()
-    # Trap floating point exceptions on CPU so that tests catch them. On GPU,
-    # start with a small memory arena (it grows as needed) so that several
-    # ranks can share a device.
-    if(AMReX_GPU_BACKEND STREQUAL "NONE")
-        list(APPEND _test_args
-            amrex.fpe_trap_invalid=1 amrex.fpe_trap_zero=1 amrex.fpe_trap_overflow=1)
-    else()
-        list(APPEND _test_args amrex.the_arena_init_size=268435456)
-    endif()
+    list(APPEND _test_args ${AMReXTutorials_TEST_ARGS})
 
     set(_command $<TARGET_FILE:${_target}> ${_test_args})
     if(AMReX_MPI)
