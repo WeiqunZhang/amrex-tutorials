@@ -40,14 +40,14 @@ the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Particles
-cmake --build build --target Particles_ElectrostaticPIC -j
+cmake --build build --target Particles_ElectrostaticPIC -j 8
 cd build/Particles/ElectrostaticPIC && mpiexec -n 2 ./ElectrostaticPIC inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

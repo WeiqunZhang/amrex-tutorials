@@ -22,7 +22,7 @@ By default, AMReX is downloaded and built as part of the tutorials
 .. code-block:: console
 
    cmake -S . -B build
-   cmake --build build -j
+   cmake --build build -j 8
    ctest --test-dir build
 
 Each tutorial ``<Topic>/<Name>`` is the target ``<Topic>_<Name>``. Its
@@ -31,7 +31,7 @@ executable, named ``<Name>``, and its ``inputs`` file are placed in
 
 .. code-block:: console
 
-   cmake --build build --target Base_HeatEquation -j
+   cmake --build build --target Base_HeatEquation -j 8
    cd build/Base/HeatEquation
    mpiexec -n 2 ./HeatEquation inputs
 
@@ -103,11 +103,11 @@ source tree, and run ``make`` in a tutorial directory:
 
    git clone https://github.com/AMReX-Codes/amrex.git
    cd amrex-tutorials/Base/HeatEquation
-   make -j
+   make -j8
    mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 
 The ``GNUmakefile`` sets the build options, which can also be given on the
-command line, e.g. ``make -j DIM=2 USE_OMP=TRUE``:
+command line, e.g. ``make -j8 DIM=2 USE_OMP=TRUE``:
 
 .. list-table::
    :header-rows: 1

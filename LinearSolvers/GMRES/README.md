@@ -30,14 +30,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=LinearSolvers
-cmake --build build --target LinearSolvers_GMRES -j
+cmake --build build --target LinearSolvers_GMRES -j 8
 cd build/LinearSolvers/GMRES && mpiexec -n 2 ./GMRES inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

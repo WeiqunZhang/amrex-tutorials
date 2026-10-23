@@ -64,7 +64,7 @@ Configure from the repository root, build and run (see :doc:`GettingStarted`):
 
    cmake -S . -B build -DAMReXTutorials_TOPICS=ML -DAMReXTutorials_TORCH=ON \
          -DCMAKE_PREFIX_PATH=/path/to/libtorch
-   cmake --build build --target ML_PyTorchInference -j
+   cmake --build build --target ML_PyTorchInference -j 8
    cd build/ML/PyTorchInference
    mpiexec -n 2 ./PyTorchInference inputs
 

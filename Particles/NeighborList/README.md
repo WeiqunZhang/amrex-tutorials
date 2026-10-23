@@ -31,14 +31,14 @@ CMake, from the repository root (2D or 3D):
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Particles
-cmake --build build --target Particles_NeighborList -j
+cmake --build build --target Particles_NeighborList -j 8
 cd build/Particles/NeighborList && mpiexec -n 2 ./NeighborList inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

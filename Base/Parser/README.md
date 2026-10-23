@@ -26,7 +26,7 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_Parser -j
+cmake --build build --target Base_Parser -j 8
 cd build/Base/Parser && ./Parser inputs
 ./Parser inputs ic.function="x*y*exp(-t)"
 ```
@@ -34,7 +34,7 @@ cd build/Base/Parser && ./Parser inputs
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

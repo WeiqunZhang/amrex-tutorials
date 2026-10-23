@@ -170,7 +170,7 @@ have an ``inputs`` file, which is read from the source tree:
 
 .. code-block:: console
 
-   cmake --build build --target Applications_CNS_Sod -j
+   cmake --build build --target Applications_CNS_Sod -j 8
    cd build/Applications/CNS
    mpiexec -n 2 ./CNS_Sod ../../../Applications/CNS/Exec/Sod/inputs
 
@@ -181,14 +181,14 @@ checkout given by ``-DFETCHCONTENT_SOURCE_DIR_AMREX``):
 .. code-block:: console
 
    cmake -S . -B build -DAMReX_SPACEDIM=2 -DAMReX_GPU_BACKEND=CUDA
-   cmake --build build -j
+   cmake --build build -j 8
 
 With GNU Make, build in a problem directory:
 
 .. code-block:: console
 
    cd Applications/CNS/Exec/Sod
-   make -j
+   make -j8
    mpiexec -n 2 ./CNS3d.gnu.TPROF.MPI.ex inputs
 
 Without an inputs file, each problem runs to its ``stop_time`` with the

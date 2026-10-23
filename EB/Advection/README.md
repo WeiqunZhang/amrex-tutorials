@@ -33,14 +33,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=EB
-cmake --build build --target EB_Advection -j
+cmake --build build --target EB_Advection -j 8
 cd build/EB/Advection && mpiexec -n 2 ./Advection inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

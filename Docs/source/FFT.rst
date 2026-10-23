@@ -67,7 +67,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target FFT_Basic -j
+   cmake --build build --target FFT_Basic -j 8
    cd build/FFT/Basic
    mpiexec -n 2 ./Basic inputs
 
@@ -122,7 +122,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target FFT_Poisson -j
+   cmake --build build --target FFT_Poisson -j 8
    cd build/FFT/Poisson
    mpiexec -n 2 ./Poisson inputs
 
@@ -175,7 +175,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target FFT_OpenBC -j
+   cmake --build build --target FFT_OpenBC -j 8
    cd build/FFT/OpenBC
    mpiexec -n 2 ./OpenBC inputs
 
@@ -225,7 +225,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target FFT_EnergySpectrum -j
+   cmake --build build --target FFT_EnergySpectrum -j 8
    cd build/FFT/EnergySpectrum
    mpiexec -n 2 ./EnergySpectrum inputs
 

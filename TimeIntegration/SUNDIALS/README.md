@@ -43,7 +43,7 @@ AMReX must be built with SUNDIALS (>= 6). CMake, from the repository root
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=TimeIntegration -DAMReX_SUNDIALS=ON
-cmake --build build --target TimeIntegration_SUNDIALS -j
+cmake --build build --target TimeIntegration_SUNDIALS -j 8
 cd build/TimeIntegration/SUNDIALS && ./SUNDIALS inputs
 ```
 
@@ -53,7 +53,7 @@ GNU Make, with AMReX cloned next to this repository and SUNDIALS installed
 must be built with MPI.
 
 ```
-make -j SUNDIALS_DIR=/path/to/sundials/install
+make -j8 SUNDIALS_DIR=/path/to/sundials/install
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

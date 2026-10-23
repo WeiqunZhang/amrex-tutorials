@@ -78,7 +78,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target EB_Geometry -j
+   cmake --build build --target EB_Geometry -j 8
    cd build/EB/Geometry
    mpiexec -n 2 ./Geometry inputs
 
@@ -140,7 +140,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target EB_Poisson -j
+   cmake --build build --target EB_Poisson -j 8
    cd build/EB/Poisson
    mpiexec -n 2 ./Poisson inputs
 
@@ -222,7 +222,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target EB_Advection -j
+   cmake --build build --target EB_Advection -j 8
    cd build/EB/Advection
    mpiexec -n 2 ./Advection inputs
 

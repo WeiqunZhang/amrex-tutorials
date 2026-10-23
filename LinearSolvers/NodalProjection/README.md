@@ -35,14 +35,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=LinearSolvers
-cmake --build build --target LinearSolvers_NodalProjection -j
+cmake --build build --target LinearSolvers_NodalProjection -j 8
 cd build/LinearSolvers/NodalProjection && mpiexec -n 2 ./NodalProjection inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

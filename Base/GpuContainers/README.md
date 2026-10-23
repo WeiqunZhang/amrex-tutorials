@@ -29,7 +29,7 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_GpuContainers -j
+cmake --build build --target Base_GpuContainers -j 8
 cd build/Base/GpuContainers && ./GpuContainers inputs
 ```
 
@@ -37,7 +37,7 @@ GNU Make, with AMReX cloned next to this repository (add `USE_CUDA=TRUE`
 for a CUDA build):
 
 ```
-make -j
+make -j8
 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

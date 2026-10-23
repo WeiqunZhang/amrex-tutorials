@@ -1,7 +1,7 @@
 # A standalone project that builds AMReX as part of itself (superbuild).
 #
 #   cmake -S . -B build [-DAMReX_GPU_BACKEND=CUDA -DCMAKE_CUDA_ARCHITECTURES=80]
-#   cmake --build build -j
+#   cmake --build build -j 8
 #
 # To use a local AMReX source tree instead of downloading it:
 #   cmake -S . -B build -DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex

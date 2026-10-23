@@ -27,7 +27,7 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_CheckpointRestart -j
+cmake --build build --target Base_CheckpointRestart -j 8
 cd build/Base/CheckpointRestart
 mpiexec -n 2 ./CheckpointRestart inputs
 mpiexec -n 1 ./CheckpointRestart inputs restart=chk00010
@@ -37,7 +37,7 @@ mpiexec -n 2 ./CheckpointRestart inputs test_restart=1
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs test_restart=1
 ```
 

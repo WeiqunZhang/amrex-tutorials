@@ -37,14 +37,14 @@ Requires MPI. CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Coupling
-cmake --build build --target Coupling_ForkJoin -j
+cmake --build build --target Coupling_ForkJoin -j 8
 cd build/Coupling/ForkJoin && mpiexec -n 4 ./ForkJoin inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 4 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

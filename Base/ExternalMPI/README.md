@@ -28,14 +28,14 @@ CMake, from the repository root (requires `AMReX_MPI=ON`):
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_ExternalMPI -j
+cmake --build build --target Base_ExternalMPI -j 8
 cd build/Base/ExternalMPI && mpiexec -n 4 ./ExternalMPI inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 4 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

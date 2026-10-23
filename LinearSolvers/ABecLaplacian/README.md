@@ -37,14 +37,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=LinearSolvers
-cmake --build build --target LinearSolvers_ABecLaplacian -j
+cmake --build build --target LinearSolvers_ABecLaplacian -j 8
 cd build/LinearSolvers/ABecLaplacian && mpiexec -n 2 ./ABecLaplacian inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

@@ -55,7 +55,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_CellPoisson -j
+   cmake --build build --target LinearSolvers_CellPoisson -j 8
    cd build/LinearSolvers/CellPoisson
    mpiexec -n 2 ./CellPoisson inputs
 
@@ -122,7 +122,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_ABecLaplacian -j
+   cmake --build build --target LinearSolvers_ABecLaplacian -j 8
    cd build/LinearSolvers/ABecLaplacian
    mpiexec -n 2 ./ABecLaplacian inputs
 
@@ -172,7 +172,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_ImplicitHeat -j
+   cmake --build build --target LinearSolvers_ImplicitHeat -j 8
    cd build/LinearSolvers/ImplicitHeat
    mpiexec -n 2 ./ImplicitHeat inputs
 
@@ -223,7 +223,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_NodalProjection -j
+   cmake --build build --target LinearSolvers_NodalProjection -j 8
    cd build/LinearSolvers/NodalProjection
    mpiexec -n 2 ./NodalProjection inputs
 
@@ -281,7 +281,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_GMRES -j
+   cmake --build build --target LinearSolvers_GMRES -j 8
    cd build/LinearSolvers/GMRES
    mpiexec -n 2 ./GMRES inputs
 
@@ -340,7 +340,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_CurlCurl -j
+   cmake --build build --target LinearSolvers_CurlCurl -j 8
    cd build/LinearSolvers/CurlCurl
    mpiexec -n 2 ./CurlCurl inputs
 
@@ -397,7 +397,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target LinearSolvers_CustomLinOp -j
+   cmake --build build --target LinearSolvers_CustomLinOp -j 8
    cd build/LinearSolvers/CustomLinOp
    mpiexec -n 2 ./CustomLinOp inputs
 

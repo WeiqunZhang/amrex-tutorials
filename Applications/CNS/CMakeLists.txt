@@ -6,7 +6,7 @@
 #
 #   cmake -S . -B build [-DAMReX_SPACEDIM=2] [-DAMReX_GPU_BACKEND=CUDA]
 #         [-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex]
-#   cmake --build build -j
+#   cmake --build build -j 8
 if(NOT COMMAND amrex_tutorial_add)
     cmake_minimum_required(VERSION 3.25)
     project(CNS LANGUAGES C CXX)

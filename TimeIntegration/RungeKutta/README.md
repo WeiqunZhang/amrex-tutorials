@@ -39,14 +39,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=TimeIntegration
-cmake --build build --target TimeIntegration_RungeKutta -j
+cmake --build build --target TimeIntegration_RungeKutta -j 8
 cd build/TimeIntegration/RungeKutta && mpiexec -n 2 ./RungeKutta inputs integration.rk.type=3
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

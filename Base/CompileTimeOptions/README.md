@@ -31,14 +31,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_CompileTimeOptions -j
+cmake --build build --target Base_CompileTimeOptions -j 8
 cd build/Base/CompileTimeOptions && ./CompileTimeOptions inputs order=second
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

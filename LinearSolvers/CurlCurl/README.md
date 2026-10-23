@@ -37,14 +37,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=LinearSolvers
-cmake --build build --target LinearSolvers_CurlCurl -j
+cmake --build build --target LinearSolvers_CurlCurl -j 8
 cd build/LinearSolvers/CurlCurl && mpiexec -n 2 ./CurlCurl inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

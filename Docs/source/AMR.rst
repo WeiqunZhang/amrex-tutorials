@@ -60,7 +60,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target AMR_StaticHierarchy -j
+   cmake --build build --target AMR_StaticHierarchy -j 8
    cd build/AMR/StaticHierarchy
    mpiexec -n 2 ./StaticHierarchy inputs
 
@@ -177,7 +177,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target AMR_AdvectionAmrCore -j
+   cmake --build build --target AMR_AdvectionAmrCore -j 8
    cd build/AMR/AdvectionAmrCore
    mpiexec -n 2 ./AdvectionAmrCore inputs
 

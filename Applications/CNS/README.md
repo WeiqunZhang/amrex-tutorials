@@ -87,7 +87,7 @@ CMake, from the repository root (targets `Applications_CNS_Sod` and
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Applications [-DAMReX_SPACEDIM=2]
-cmake --build build --target Applications_CNS_Sod -j
+cmake --build build --target Applications_CNS_Sod -j 8
 cd build/Applications/CNS && mpiexec -n 2 ./CNS_Sod ../../../Applications/CNS/Exec/Sod/inputs
 ```
 
@@ -97,14 +97,14 @@ local checkout):
 ```
 cmake -S . -B build [-DAMReX_SPACEDIM=2] [-DAMReX_GPU_BACKEND=CUDA] \
       [-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex]
-cmake --build build -j
+cmake --build build -j 8
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
 cd Exec/Sod
-make -j [DIM=2] [USE_CUDA=TRUE]
+make -j8 [DIM=2] [USE_CUDA=TRUE]
 mpiexec -n 2 ./CNS3d.gnu.TPROF.MPI.ex inputs
 ```
 

@@ -74,7 +74,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Coupling_ForkJoin -j
+   cmake --build build --target Coupling_ForkJoin -j 8
    cd build/Coupling/ForkJoin
    mpiexec -n 4 ./ForkJoin inputs
 
@@ -153,7 +153,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Coupling_MPMD_Main Coupling_MPMD_Agent -j
+   cmake --build build --target Coupling_MPMD_Main Coupling_MPMD_Agent -j 8
    cd build/Coupling/MPMD
    mpiexec -n 2 ./MPMD_Main inputs : -n 2 ./MPMD_Agent inputs
    mpiexec -n 2 ./MPMD_Main inputs : -n 2 python3 agent.py inputs

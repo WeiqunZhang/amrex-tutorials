@@ -29,14 +29,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_ParmParse -j
+cmake --build build --target Base_ParmParse -j 8
 cd build/Base/ParmParse && ./ParmParse inputs nsteps=200
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 ./main3d.gnu.TPROF.MPI.ex inputs nsteps=200
 ```
 

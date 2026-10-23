@@ -33,14 +33,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=AMR
-cmake --build build --target AMR_StaticHierarchy -j
+cmake --build build --target AMR_StaticHierarchy -j 8
 cd build/AMR/StaticHierarchy && mpiexec -n 2 ./StaticHierarchy inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j DIM=2
+make -j8 DIM=2
 mpiexec -n 2 ./main2d.gnu.TPROF.MPI.ex inputs
 ```
 

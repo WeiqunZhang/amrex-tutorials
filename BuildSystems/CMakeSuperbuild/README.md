@@ -8,7 +8,7 @@ this way. Copy this directory to start a new project.
 
 ```
 cmake -S . -B build
-cmake --build build -j
+cmake --build build -j 8
 mpiexec -n 2 ./build/MyApp
 ```
 

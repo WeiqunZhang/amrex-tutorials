@@ -37,7 +37,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_HelloWorld -j
+   cmake --build build --target Base_HelloWorld -j 8
    cd build/Base/HelloWorld
    mpiexec -n 2 ./HelloWorld name=AMReX
 
@@ -86,7 +86,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_ParmParse -j
+   cmake --build build --target Base_ParmParse -j 8
    cd build/Base/ParmParse
    ./ParmParse inputs nsteps=200
 
@@ -147,7 +147,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_MultiFab -j
+   cmake --build build --target Base_MultiFab -j 8
    cd build/Base/MultiFab
    mpiexec -n 2 ./MultiFab inputs
 
@@ -182,7 +182,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_HeatEquation -j
+   cmake --build build --target Base_HeatEquation -j 8
    cd build/Base/HeatEquation
    mpiexec -n 2 ./HeatEquation inputs
 
@@ -245,7 +245,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_BoundaryConditions -j
+   cmake --build build --target Base_BoundaryConditions -j 8
    cd build/Base/BoundaryConditions
    mpiexec -n 2 ./BoundaryConditions inputs
 
@@ -299,7 +299,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_CheckpointRestart -j
+   cmake --build build --target Base_CheckpointRestart -j 8
    cd build/Base/CheckpointRestart
    mpiexec -n 2 ./CheckpointRestart inputs
    mpiexec -n 1 ./CheckpointRestart inputs restart=chk00010
@@ -354,7 +354,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_Reductions -j
+   cmake --build build --target Base_Reductions -j 8
    cd build/Base/Reductions
    mpiexec -n 2 ./Reductions inputs
 
@@ -404,7 +404,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_GpuContainers -j
+   cmake --build build --target Base_GpuContainers -j 8
    cd build/Base/GpuContainers
    ./GpuContainers inputs
 
@@ -449,7 +449,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_Parser -j
+   cmake --build build --target Base_Parser -j 8
    cd build/Base/Parser
    ./Parser inputs
    ./Parser inputs ic.function="x*y*exp(-t)"
@@ -491,7 +491,7 @@ Run:
 
 .. code-block:: console
 
-   cmake --build build --target Base_CompileTimeOptions -j
+   cmake --build build --target Base_CompileTimeOptions -j 8
    cd build/Base/CompileTimeOptions
    ./CompileTimeOptions inputs order=second
 
@@ -529,6 +529,6 @@ Run (requires ``AMReX_MPI=ON``):
 
 .. code-block:: console
 
-   cmake --build build --target Base_ExternalMPI -j
+   cmake --build build --target Base_ExternalMPI -j 8
    cd build/Base/ExternalMPI
    mpiexec -n 4 ./ExternalMPI inputs

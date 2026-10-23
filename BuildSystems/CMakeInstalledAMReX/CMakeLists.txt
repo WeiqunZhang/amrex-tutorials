@@ -2,10 +2,10 @@
 #
 # First build and install AMReX, e.g.,
 #   cmake -S amrex -B amrex/build -DAMReX_SPACEDIM=3 -DCMAKE_INSTALL_PREFIX=/path/to/install
-#   cmake --build amrex/build -j --target install
+#   cmake --build amrex/build -j 8 --target install
 # then
 #   cmake -S . -B build -DAMReX_ROOT=/path/to/install
-#   cmake --build build -j
+#   cmake --build build -j 8
 cmake_minimum_required(VERSION 3.25)
 project(MyApp LANGUAGES C CXX)
 

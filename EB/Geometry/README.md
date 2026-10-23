@@ -36,14 +36,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=EB
-cmake --build build --target EB_Geometry -j
+cmake --build build --target EB_Geometry -j 8
 cd build/EB/Geometry && mpiexec -n 2 ./Geometry inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

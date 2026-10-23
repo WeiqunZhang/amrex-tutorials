@@ -33,7 +33,7 @@ Build and run:
 
    cd BuildSystems/CMakeSuperbuild
    cmake -S . -B build
-   cmake --build build -j
+   cmake --build build -j 8
    mpiexec -n 2 ./build/MyApp
 
 - AMReX options, e.g., ``-DAMReX_SPACEDIM=2 -DAMReX_OMP=ON -DAMReX_EB=ON``.
@@ -69,11 +69,11 @@ Install AMReX once, then build the project:
 .. code-block:: console
 
    cmake -S /path/to/amrex -B amrex-build -DAMReX_SPACEDIM=3 -DCMAKE_INSTALL_PREFIX=$HOME/amrex-install
-   cmake --build amrex-build -j --target install
+   cmake --build amrex-build -j 8 --target install
 
    cd BuildSystems/CMakeInstalledAMReX
    cmake -S . -B build -DAMReX_ROOT=$HOME/amrex-install
-   cmake --build build -j
+   cmake --build build -j 8
    mpiexec -n 2 ./build/MyApp
 
 .. _buildsystems-gnumake:
@@ -101,7 +101,7 @@ Build and run:
 .. code-block:: console
 
    cd BuildSystems/GNUMake/Exec
-   make -j AMREX_HOME=/path/to/amrex
+   make -j8 AMREX_HOME=/path/to/amrex
    mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex
 
 Options are set in ``Exec/GNUmakefile`` or on the command line:

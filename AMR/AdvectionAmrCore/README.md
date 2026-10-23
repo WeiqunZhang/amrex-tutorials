@@ -62,14 +62,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=AMR
-cmake --build build --target AMR_AdvectionAmrCore -j
+cmake --build build --target AMR_AdvectionAmrCore -j 8
 cd build/AMR/AdvectionAmrCore && mpiexec -n 2 ./AdvectionAmrCore inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j DIM=2
+make -j8 DIM=2
 mpiexec -n 2 ./main2d.gnu.TPROF.MPI.ex inputs
 ```
 

@@ -9,14 +9,14 @@ Install AMReX once:
 
 ```
 cmake -S /path/to/amrex -B amrex-build -DAMReX_SPACEDIM=3 -DCMAKE_INSTALL_PREFIX=$HOME/amrex-install
-cmake --build amrex-build -j --target install
+cmake --build amrex-build -j 8 --target install
 ```
 
 Then build this project:
 
 ```
 cmake -S . -B build -DAMReX_ROOT=$HOME/amrex-install
-cmake --build build -j
+cmake --build build -j 8
 mpiexec -n 2 ./build/MyApp
 ```
 

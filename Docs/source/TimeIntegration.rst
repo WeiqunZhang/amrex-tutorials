@@ -94,7 +94,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target TimeIntegration_RungeKutta -j
+   cmake --build build --target TimeIntegration_RungeKutta -j 8
    cd build/TimeIntegration/RungeKutta
    mpiexec -n 2 ./RungeKutta inputs integration.rk.type=3
 
@@ -180,7 +180,7 @@ see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target TimeIntegration_SUNDIALS -j
+   cmake --build build --target TimeIntegration_SUNDIALS -j 8
    cd build/TimeIntegration/SUNDIALS
    mpiexec -n 2 ./SUNDIALS inputs
 

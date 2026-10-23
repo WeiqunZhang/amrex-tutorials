@@ -1,7 +1,7 @@
 # AMReX tutorials: superbuild of all tutorials.
 #
 #   cmake -S . -B build [-DAMReX_GPU_BACKEND=CUDA] [-DAMReXTutorials_TOPICS="Base;FFT"]
-#   cmake --build build -j
+#   cmake --build build -j 8
 #   ctest --test-dir build
 #
 # AMReX is fetched from GitHub by default. To use something else:

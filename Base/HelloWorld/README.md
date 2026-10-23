@@ -12,14 +12,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=Base
-cmake --build build --target Base_HelloWorld -j
+cmake --build build --target Base_HelloWorld -j 8
 cd build/Base/HelloWorld && mpiexec -n 2 ./HelloWorld name=AMReX
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex name=AMReX
 ```
 

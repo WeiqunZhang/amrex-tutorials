@@ -15,7 +15,7 @@ as part of the tutorials):
 
 ```
 cmake -S . -B build
-cmake --build build -j
+cmake --build build -j 8
 ctest --test-dir build
 ```
 
@@ -37,7 +37,7 @@ A single tutorial is built with its target, `<Topic>_<Name>`, e.g.,
 `cmake --build build --target Base_HeatEquation`.
 
 With GNU Make, clone AMReX next to this repository (or set `AMREX_HOME`)
-and run `make -j` in a tutorial directory. See each tutorial's README.
+and run `make -j8` in a tutorial directory. See each tutorial's README.
 
 To set up your own project, see [BuildSystems](BuildSystems).
 

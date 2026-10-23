@@ -27,14 +27,14 @@ CMake, from the repository root:
 
 ```
 cmake -S . -B build -DAMReXTutorials_TOPICS=FFT
-cmake --build build --target FFT_Basic -j
+cmake --build build --target FFT_Basic -j 8
 cd build/FFT/Basic && mpiexec -n 2 ./Basic inputs
 ```
 
 GNU Make, with AMReX cloned next to this repository:
 
 ```
-make -j
+make -j8
 mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
 ```
 

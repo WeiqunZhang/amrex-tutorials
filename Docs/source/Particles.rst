@@ -71,7 +71,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Particles_Basics -j
+   cmake --build build --target Particles_Basics -j 8
    cd build/Particles/Basics
    mpiexec -n 2 ./Basics inputs
 
@@ -127,7 +127,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Particles_ParticleMesh -j
+   cmake --build build --target Particles_ParticleMesh -j 8
    cd build/Particles/ParticleMesh
    mpiexec -n 2 ./ParticleMesh inputs
 
@@ -185,7 +185,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Particles_Sorting -j
+   cmake --build build --target Particles_Sorting -j 8
    cd build/Particles/Sorting
    mpiexec -n 2 ./Sorting inputs
 
@@ -238,7 +238,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Particles_NeighborList -j
+   cmake --build build --target Particles_NeighborList -j 8
    cd build/Particles/NeighborList
    mpiexec -n 2 ./NeighborList inputs
 
@@ -327,7 +327,7 @@ Run (from a CMake build directory, see :doc:`GettingStarted`):
 
 .. code-block:: console
 
-   cmake --build build --target Particles_ElectrostaticPIC -j
+   cmake --build build --target Particles_ElectrostaticPIC -j 8
    cd build/Particles/ElectrostaticPIC
    mpiexec -n 2 ./ElectrostaticPIC inputs
 
