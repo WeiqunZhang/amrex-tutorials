@@ -13,7 +13,7 @@ set(AMReX_EB             ON  CACHE BOOL "Build AMReX EB support")
 set(AMReX_FFT            ON  CACHE BOOL "Build AMReX FFT support")
 set(AMReX_PARTICLES      ON  CACHE BOOL "Build AMReX particle support")
 set(AMReX_LINEAR_SOLVERS ON  CACHE BOOL "Build AMReX linear solvers")
-set(AMReX_TINY_PROFILE   ON  CACHE BOOL "Build AMReX with TinyProfiler")
+set(AMReX_TINY_PROFILE   OFF CACHE BOOL "Build AMReX with TinyProfiler")
 set(AMReX_INSTALL        OFF CACHE BOOL "Generate AMReX install targets")
 set(AMReX_GPU_BACKEND   NONE CACHE STRING "GPU backend: NONE, CUDA, HIP or SYCL")
 

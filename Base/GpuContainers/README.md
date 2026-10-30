@@ -38,7 +38,7 @@ for a CUDA build):
 
 ```
 make -j8
-./main3d.gnu.TPROF.MPI.ex inputs
+./main3d.gnu.MPI.ex inputs
 ```
 
 ## Expected output

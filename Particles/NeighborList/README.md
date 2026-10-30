@@ -39,7 +39,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 Use `n_cell` and `nsteps` for a larger run. The time step is

@@ -38,7 +38,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs test_restart=1
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs test_restart=1
 ```
 
 ## Expected output (`test_restart=1`)

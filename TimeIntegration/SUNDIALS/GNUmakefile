@@ -8,7 +8,7 @@ USE_OMP      ?= FALSE
 USE_CUDA     ?= FALSE
 USE_HIP      ?= FALSE
 USE_SYCL     ?= FALSE
-TINY_PROFILE ?= TRUE
+TINY_PROFILE ?= FALSE
 BL_NO_FORT   ?= TRUE
 
 # Needs an installed SUNDIALS (>= 6), e.g., make SUNDIALS_DIR=/path/to/sundials/install

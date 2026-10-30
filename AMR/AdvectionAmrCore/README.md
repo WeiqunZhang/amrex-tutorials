@@ -70,7 +70,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8 DIM=2
-mpiexec -n 2 ./main2d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main2d.gnu.MPI.ex inputs
 ```
 
 The inputs file stops after 10 steps. For the full problem, use

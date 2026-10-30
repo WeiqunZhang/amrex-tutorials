@@ -42,7 +42,7 @@ GNU Make builds one program at a time, selected with `PROG`:
 ```
 make -j8 PROG=main
 make -j8 PROG=agent
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs : -n 2 ./agent3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs : -n 2 ./agent3d.gnu.MPI.ex inputs
 ```
 
 With the Python agent (needs pyAMReX built with MPI, and mpi4py; add

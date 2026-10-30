@@ -48,7 +48,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 `n_cell` and `nppc` take three values; 2D uses the first two. For a

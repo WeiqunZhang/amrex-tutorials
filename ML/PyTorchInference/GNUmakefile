@@ -6,7 +6,7 @@ COMP         ?= gnu
 USE_MPI      ?= TRUE
 USE_OMP      ?= FALSE
 USE_CUDA     ?= FALSE
-TINY_PROFILE ?= TRUE
+TINY_PROFILE ?= FALSE
 BL_NO_FORT   ?= TRUE
 
 # LibTorch directory (with include/ and lib/), e.g., an unpacked LibTorch download

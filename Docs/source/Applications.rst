@@ -189,7 +189,7 @@ With GNU Make, build in a problem directory:
 
    cd Applications/CNS/Exec/Sod
    make -j8
-   mpiexec -n 2 ./CNS3d.gnu.TPROF.MPI.ex inputs
+   mpiexec -n 2 ./CNS3d.gnu.MPI.ex inputs
 
 Without an inputs file, each problem runs to its ``stop_time`` with the
 defaults in ``cns_prob_defaults``. The ``inputs`` files stop after 20

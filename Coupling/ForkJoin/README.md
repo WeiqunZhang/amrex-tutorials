@@ -45,7 +45,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 4 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 4 ./main3d.gnu.MPI.ex inputs
 ```
 
 Try `ntasks=4` or `ncomp=8`. The number of tasks is limited by the number

@@ -49,7 +49,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 Try three components: `coeff = 1 0 0  0 2 0.5  0 0.3 1`.

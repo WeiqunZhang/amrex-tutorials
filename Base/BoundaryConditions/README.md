@@ -37,7 +37,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 Try `phi_lo=2 phi_hi=-1`, or `stop_time=0.5 plot_int=100` to watch the

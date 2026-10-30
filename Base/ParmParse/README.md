@@ -37,7 +37,7 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-./main3d.gnu.TPROF.MPI.ex inputs nsteps=200
+./main3d.gnu.MPI.ex inputs nsteps=200
 ```
 
 ## Expected output

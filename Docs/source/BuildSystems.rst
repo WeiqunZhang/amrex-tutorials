@@ -102,7 +102,7 @@ Build and run:
 
    cd BuildSystems/GNUMake/Exec
    make -j8 AMREX_HOME=/path/to/amrex
-   mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex
+   mpiexec -n 2 ./main3d.gnu.MPI.ex
 
 Options are set in ``Exec/GNUmakefile`` or on the command line:
 
@@ -123,5 +123,4 @@ Options are set in ``Exec/GNUmakefile`` or on the command line:
      - TRUE, FALSE (e.g., ``USE_CUDA=TRUE CUDA_ARCH=80``)
 
 The name of the executable records the build options, e.g.,
-``main3d.gnu.TPROF.MPI.ex`` for a 3D GCC build with MPI and the tiny
-profiler.
+``main3d.gnu.MPI.ex`` for a 3D GCC build with MPI.

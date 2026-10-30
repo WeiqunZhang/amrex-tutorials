@@ -30,6 +30,7 @@ Useful options:
 | `-DFETCHCONTENT_SOURCE_DIR_AMREX=/path/to/amrex` | Use a local AMReX source tree |
 | `-DAMReX_ROOT=/path/to/install` | Use an installed AMReX |
 | `-DAMReX_TESTING=ON` | Trap floating-point exceptions in the tests |
+| `-DAMReX_TINY_PROFILE=ON` | Build with TinyProfiler (see [Base/HeatEquation](Base/HeatEquation)) |
 | `-DAMReX_SUNDIALS=ON` | Build the SUNDIALS tutorial (SUNDIALS is downloaded) |
 | `-DAMReXTutorials_PYTHON=ON` | Test the pyAMReX tutorials |
 | `-DAMReXTutorials_TORCH=ON` | Build the PyTorch tutorial (needs LibTorch) |
@@ -51,7 +52,7 @@ complete code to copy as the starting point of an application.
 
 | Tutorial | Level | What it shows |
 |---|---|---|
-| [HelloWorld](Base/HelloWorld) | ★ | Initialize AMReX, print, read a parameter |
+| [HelloWorld](Base/HelloWorld) | ★ | Initialize AMReX and print from one or all ranks |
 | [ParmParse](Base/ParmParse) | ★ | Runtime parameters: arrays, expressions, enums, tables, sections |
 | [MultiFab](Base/MultiFab) | ★ | `BoxArray`, `DistributionMapping`, `Geometry`, `MultiFab`, `ParallelFor`, `MFIter`, plotfiles |
 | [HeatEquation](Base/HeatEquation) | ★ | Explicit heat equation on a periodic domain |

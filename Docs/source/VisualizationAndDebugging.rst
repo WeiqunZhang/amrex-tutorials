@@ -177,13 +177,16 @@ suspect kernels, or running with ``CUDA_LAUNCH_BLOCKING=1`` on NVIDIA GPUs,
 helps locate it. ``compute-sanitizer`` (CUDA) finds out-of-bounds and
 race errors in device code.
 
+.. _profiling:
+
 Profiling with TinyProfiler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The tutorials are built with TinyProfiler by default (``AMReX_TINY_PROFILE``
-in a CMake superbuild, ``TINY_PROFILE=TRUE`` in the GNU Make files). Code
-regions are timed with ``BL_PROFILE("name")``, which measures until the end
-of the enclosing scope, and AMReX functions are already instrumented. At
+TinyProfiler is off by default in the tutorials. Build with
+``-DAMReX_TINY_PROFILE=ON`` (CMake) or ``TINY_PROFILE=TRUE`` (GNU Make) to
+turn it on. AMReX functions are already instrumented, and code regions are
+timed with ``BL_PROFILE("name")``, which measures until the end of the
+enclosing scope. Without TinyProfiler, ``BL_PROFILE`` does nothing. At
 ``amrex::Finalize``, TinyProfiler prints two tables, sorted by exclusive
 and by inclusive time, with the number of calls and the minimum, average
 and maximum time over MPI ranks:

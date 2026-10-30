@@ -9,7 +9,7 @@ scales to codes with several problem setups (`Exec/ProblemA`, ...).
 ```
 cd Exec
 make -j8 AMREX_HOME=/path/to/amrex
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex
+mpiexec -n 2 ./main3d.gnu.MPI.ex
 ```
 
 ## Options

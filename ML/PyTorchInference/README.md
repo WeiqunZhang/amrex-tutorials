@@ -44,7 +44,7 @@ pre-C++11 ABI also needs `-D_GLIBCXX_USE_CXX11_ABI=0`):
 
 ```
 make -j8 PYTORCH_ROOT=/path/to/libtorch
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 ## Expected output

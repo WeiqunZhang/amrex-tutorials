@@ -65,6 +65,8 @@ Options
      - Use an installed AMReX
    * - ``-DAMReX_TESTING=ON``
      - Trap floating-point exceptions in the tests
+   * - ``-DAMReX_TINY_PROFILE=ON``
+     - Build with TinyProfiler; see :ref:`profiling`
    * - ``-DAMReX_SUNDIALS=ON``
      - Build the :ref:`SUNDIALS <timeintegration-sundials>` tutorial
        (SUNDIALS is downloaded unless ``SUNDIALS_ROOT`` is given)
@@ -73,8 +75,8 @@ Options
    * - ``-DAMReXTutorials_TORCH=ON``
      - Build the :doc:`ML` tutorial (needs LibTorch)
 
-In a superbuild, AMReX is configured with EB, FFT, particles, linear solvers
-and TinyProfiler enabled. Any AMReX CMake option, e.g. ``-DAMReX_FFT=OFF``,
+In a superbuild, AMReX is configured with EB, FFT, particles and linear
+solvers enabled. Any AMReX CMake option, e.g. ``-DAMReX_FFT=OFF``,
 can be passed on the command line. An installed AMReX must have been built
 with the same ``AMReX_GPU_BACKEND``. Tutorials that need a component the
 AMReX build does not have (e.g. EB, FFT, MPI or SUNDIALS), or that do not
@@ -107,7 +109,7 @@ source tree, and run ``make`` in a tutorial directory:
    git clone https://github.com/AMReX-Codes/amrex.git
    cd amrex-tutorials/Base/HeatEquation
    make -j8
-   mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+   mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 
 The ``GNUmakefile`` sets the build options, which can also be given on the
 command line, e.g. ``make -j8 DIM=2 USE_OMP=TRUE``:
@@ -131,7 +133,7 @@ command line, e.g. ``make -j8 DIM=2 USE_OMP=TRUE``:
    * - ``DEBUG``
      - Debug build with bounds checking
    * - ``TINY_PROFILE``
-     - TinyProfiler (default on)
+     - TinyProfiler (default off); see :ref:`profiling`
 
 The name of the executable reflects the options, e.g.
 ``main3d.gnu.DEBUG.MPI.OMP.ex``. ``make realclean`` removes the build.

@@ -6,7 +6,7 @@ add an absorption term) is written once with runtime branches and once with
 `ParallelFor` taking `CompileTimeOptions`, which compiles a specialized
 kernel for every combination and launches the one that matches the runtime
 values. The program checks that both give the same result and times them
-with TinyProfiler.
+with `BL_PROFILE` (see [HeatEquation](../HeatEquation#profiling)).
 
 **Key APIs:** `ParallelFor(TypeList<CompileTimeOptions<...>...>, {...}, box, f)`,
 `CompileTimeOptions`, `if constexpr`, `AMREX_ENUM`, `BL_PROFILE`
@@ -39,10 +39,12 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-./main3d.gnu.TPROF.MPI.ex inputs
+./main3d.gnu.MPI.ex inputs
 ```
 
-Use e.g. `n_cell=256 nrepeat=20` and an optimized GPU build for timings.
+For timings, build with TinyProfiler on (`-DAMReX_TINY_PROFILE=ON` or
+`make TINY_PROFILE=TRUE`) and use e.g. `n_cell=256 nrepeat=20` and an
+optimized GPU build.
 
 ## Expected output
 
@@ -50,7 +52,7 @@ Use e.g. `n_cell=256 nrepeat=20` and an optimized GPU build for timings.
 order = fourth, absorption = 1
 max |result| = 117.2234743, max diff between the two kernels = 0
 PASSED
-...
-compile_time_options    ...
-runtime_branches        ...
 ```
+
+With TinyProfiler on, the profiling tables include the timers
+`compile_time_options` and `runtime_branches`.

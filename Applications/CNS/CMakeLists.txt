@@ -22,7 +22,7 @@ if(NOT COMMAND amrex_tutorial_add)
     set(AMReX_GPU_BACKEND  NONE CACHE STRING "GPU backend: NONE, CUDA, HIP or SYCL")
     set(AMReX_AMRLEVEL     ON   CACHE BOOL   "Build the AmrLevel class")
     set(AMReX_PROBINIT     OFF  CACHE BOOL   "Enable the legacy probin file")
-    set(AMReX_TINY_PROFILE ON   CACHE BOOL   "Enable TinyProfiler")
+    set(AMReX_TINY_PROFILE OFF  CACHE BOOL   "Enable TinyProfiler")
     set(AMReX_INSTALL      OFF  CACHE BOOL   "Generate AMReX install targets")
 
     if(AMReX_GPU_BACKEND STREQUAL "CUDA")

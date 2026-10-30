@@ -105,7 +105,7 @@ GNU Make, with AMReX cloned next to this repository:
 ```
 cd Exec/Sod
 make -j8 [DIM=2] [USE_CUDA=TRUE]
-mpiexec -n 2 ./CNS3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./CNS3d.gnu.MPI.ex inputs
 ```
 
 Without an inputs file, each problem runs to its `stop_time` with the

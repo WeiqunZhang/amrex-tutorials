@@ -29,11 +29,22 @@ GNU Make, with AMReX cloned next to this repository:
 
 ```
 make -j8
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 Add `plot_int=10` to write a plotfile every 10 steps, and e.g.
 `n_cell=128 stop_time=0.05` for a larger run.
+
+## Profiling
+
+AMReX has a built-in profiler, TinyProfiler, which is off by default in
+the tutorials. Build with `-DAMReX_TINY_PROFILE=ON` (CMake) or
+`make TINY_PROFILE=TRUE` (GNU Make), and at the end of the run it prints
+the time spent in AMReX functions such as `FillBoundary`. To time your own
+code, put `BL_PROFILE("name");` at the start of a scope; it times until the
+end of the scope and does nothing when TinyProfiler is off. For GPU runs,
+add `tiny_profiler.device_synchronize_around_region=1` to get accurate
+times for asynchronous kernels.
 
 ## Expected output
 

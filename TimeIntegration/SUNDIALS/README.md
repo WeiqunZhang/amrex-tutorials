@@ -54,7 +54,7 @@ must be built with MPI.
 
 ```
 make -j8 SUNDIALS_DIR=/path/to/sundials/install
-mpiexec -n 2 ./main3d.gnu.TPROF.MPI.ex inputs
+mpiexec -n 2 ./main3d.gnu.MPI.ex inputs
 ```
 
 ## Expected output

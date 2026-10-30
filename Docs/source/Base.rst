@@ -21,13 +21,12 @@ HelloWorld
 :Level: ★
 :Source: `Base/HelloWorld <https://github.com/AMReX-Codes/amrex-tutorials/tree/main/Base/HelloWorld>`__
 :Key APIs: ``amrex::Initialize``, ``amrex::Finalize``, ``amrex::Print``,
-           ``amrex::AllPrint``, ``amrex::ParmParse``
+           ``amrex::AllPrint``
 
-The smallest AMReX program. ``amrex::Initialize`` sets up MPI, the GPU
-device and the ``ParmParse`` database from the command line;
-``amrex::Finalize`` releases them. AMReX objects must be destroyed before
-``Finalize``, hence the extra scope. ``amrex::Print`` writes from the I/O
-rank only, ``amrex::AllPrint`` from every rank.
+The smallest AMReX program. ``amrex::Initialize`` sets up MPI and the GPU
+device; ``amrex::Finalize`` releases them. AMReX objects must be destroyed
+before ``Finalize``, hence the extra scope. ``amrex::Print`` writes from
+the I/O rank only, ``amrex::AllPrint`` from every rank.
 
 .. literalinclude:: ../../Base/HelloWorld/main.cpp
    :language: cpp
@@ -39,7 +38,7 @@ Run:
 
    cmake --build build --target Base_HelloWorld -j 8
    cd build/Base/HelloWorld
-   mpiexec -n 2 ./HelloWorld name=AMReX
+   mpiexec -n 2 ./HelloWorld
 
 .. _base-parmparse:
 
@@ -187,7 +186,8 @@ Run:
    mpiexec -n 2 ./HeatEquation inputs
 
 Add ``plot_int=10`` to write a plotfile every 10 steps, and e.g.
-``n_cell=128 stop_time=0.05`` for a larger run.
+``n_cell=128 stop_time=0.05`` for a larger run. To see where the time goes,
+build with TinyProfiler; see :ref:`profiling`.
 
 .. _base-boundaryconditions:
 
@@ -470,7 +470,8 @@ with two runtime options, the order of a Laplacian stencil and whether to
 add an absorption term, is written once with runtime branches and once with
 ``CompileTimeOptions``. AMReX compiles a specialized kernel for every
 combination and launches the one that matches the runtime values. The
-program checks that both versions agree and times them with TinyProfiler.
+program checks that both versions agree and times them with ``BL_PROFILE``
+(see :ref:`profiling`).
 
 .. literalinclude:: ../../Base/CompileTimeOptions/main.cpp
    :language: cpp
@@ -495,7 +496,8 @@ Run:
    cd build/Base/CompileTimeOptions
    ./CompileTimeOptions inputs order=second
 
-Use e.g. ``n_cell=256 nrepeat=20`` and an optimized GPU build for timings.
+For timings, build with TinyProfiler on and use e.g. ``n_cell=256
+nrepeat=20`` and an optimized GPU build.
 
 .. _base-externalmpi:
 
