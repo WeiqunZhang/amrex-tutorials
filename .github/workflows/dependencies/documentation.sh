@@ -11,8 +11,6 @@ sudo apt-get update
 
 sudo apt-get install -y --no-install-recommends\
     build-essential \
-    pandoc \
-    doxygen \
     texlive \
     texlive-latex-extra \
     texlive-lang-cjk \
