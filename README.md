@@ -41,6 +41,10 @@ A single tutorial is built with its target, `<Topic>_<Name>`, e.g.,
 With GNU Make, clone AMReX next to this repository (or set `AMREX_HOME`)
 and run `make -j8` in a tutorial directory. See each tutorial's README.
 
+The `inputs` files use small settings so that each tutorial runs in a few
+seconds. Production runs usually use a much larger `max_grid_size` and
+`blocking_factor` for performance, especially on GPUs.
+
 To set up your own project, see [BuildSystems](BuildSystems).
 
 ## Catalog

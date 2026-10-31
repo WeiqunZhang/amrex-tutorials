@@ -138,6 +138,20 @@ command line, e.g. ``make -j8 DIM=2 USE_OMP=TRUE``:
 The name of the executable reflects the options, e.g.
 ``main3d.gnu.DEBUG.MPI.OMP.ex``. ``make realclean`` removes the build.
 
+Running the tutorials
+---------------------
+
+Runtime parameters come from the ``inputs`` file and the command line;
+arguments after the inputs file override it, e.g.
+``mpiexec -n 2 ./HeatEquation inputs n_cell=128``. See
+:ref:`base-parmparse`.
+
+The ``inputs`` files are set up so that each tutorial runs in a few seconds,
+also as a test in CI: small domains, few steps, and small grids. In
+production runs, ``max_grid_size`` and ``blocking_factor`` are usually much
+larger, because larger boxes mean less overhead per box and better
+performance, especially on GPUs.
+
 Your own project
 ----------------
 
