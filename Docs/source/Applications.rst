@@ -7,8 +7,9 @@ Complete solvers that combine several topics, meant to be copied as the
 starting point of a new application. They may use a ``Source/`` directory
 for the solver and ``Exec/<Problem>/`` directories for problem setups.
 ``CNS`` needs AMReX built with ``AmrLevel`` support (``AMReX_AMRLEVEL``,
-on by default) and runs in 2D and 3D only. Build only this
-topic with ``-DAMReXTutorials_TOPICS=Applications``; see
+on by default) and ``IncFlow`` needs the linear solvers
+(``AMReX_LINEAR_SOLVERS``, on by default). Both run in 2D and 3D only.
+Build only this topic with ``-DAMReXTutorials_TOPICS=Applications``; see
 :doc:`GettingStarted`.
 
 .. _applications-cns:
@@ -198,3 +199,171 @@ steps; remove ``max_step`` and increase ``amr.n_cell`` and
 ``cns.hi_bc``) are 0 interior (periodic), 1 inflow (not implemented),
 2 outflow, 3 symmetry, 4 slip wall and 5 no-slip wall. ``cns.v=2`` prints
 the conserved totals after every coarse step.
+
+.. _applications-incflow:
+
+IncFlow
+-------
+
+:Level: Blueprint
+:Source: `Applications/IncFlow <https://github.com/AMReX-Codes/amrex-tutorials/tree/main/Applications/IncFlow>`__
+:Key APIs: ``AmrCore``, ``FillPatchTwoLevels``, ``InterpFromCoarseLevel``,
+   ``GpuBndryFuncFab``, ``MLPoisson``, ``MLNodeLaplacian``,
+   ``MLABecLaplacian``, ``MLMG::solve``, ``MLMG::getFluxes``,
+   ``MLMG::apply``, ``computeDivergence``, ``average_down_faces``,
+   ``amrex_calc_xslope_extdir``, ``AMRErrorTag``
+
+A small incompressible Navier-Stokes solver built on ``amrex::AmrCore``, in
+the spirit of `incflo <https://github.com/AMReX-Fluids/incflo>`__ but with
+one method for each step and no options. It solves
+
+.. math::
+
+   \frac{\partial u}{\partial t} + \nabla\cdot(u u) = -\nabla p + \nu \nabla^2 u,
+   \qquad \nabla\cdot u = 0
+
+with constant density, adaptive mesh refinement and periodic or no-slip
+wall boundaries. All levels advance together with the same time step. The
+projections are written directly with the MLMG linear solvers. It comes
+with three problems:
+
+- ``Exec/TaylorGreen``: decaying Taylor-Green vortices on one level, checked
+  against the exact solution.
+- ``Exec/DoubleShearLayer``: two periodic shear layers that roll up into
+  vortices (Kelvin-Helmholtz), with a fine level that follows the vorticity.
+  The mean velocity must be conserved to round-off, also across levels.
+- ``Exec/LidDrivenCavity``: no-slip walls and a moving lid, refined near the
+  lid.
+
+Compared with :ref:`amr-advectionamrcore`, which also manages its level data
+on top of ``AmrCore``, the solution here is a velocity that must stay
+divergence free, so each step involves elliptic solves over all levels.
+
+Code structure
+^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - File
+     - Contents
+   * - ``Source/main.cpp``
+     - Initialize, ``InitData``, ``Evolve``, check the result
+   * - ``Source/IncFlow.H``, ``Source/IncFlow.cpp``
+     - The ``AmrCore`` subclass: parameters, boundary conditions, level
+       creation, tagging, ``FillPatch``
+   * - ``Source/Advance.cpp``
+     - Time step, advection and viscous terms
+   * - ``Source/Advection_K.H``
+     - GPU kernels: slopes, face values, upwinding
+   * - ``Source/Projection.cpp``
+     - MAC and nodal projections
+   * - ``Source/IO.cpp``
+     - Plotfiles, checkpoint and restart
+   * - ``Exec/<Problem>/prob.H``
+     - The initial velocity ``prob_initdata``
+   * - ``Exec/<Problem>/prob.cpp``
+     - Default parameters (``prob_add_defaults``) and the check of the
+       result (``prob_check``)
+
+``AmrCore`` calls ``MakeNewLevelFromScratch`` at start-up,
+``MakeNewLevelFromCoarse``, ``RemakeLevel`` and ``ClearLevel`` when
+regridding, and ``ErrorEst`` to tag cells where the vorticity exceeds
+``incflow.vort_tag``. Ghost cells are filled by ``FillPatch`` from the same
+level, the coarser level, and the wall velocity.
+
+Time step
+^^^^^^^^^
+
+Each step is a predictor-corrector method. ``ComputeRHS`` returns
+:math:`R(u) = -\nabla\cdot(u u) + \nu\nabla^2 u` without the pressure
+gradient, and the nodal projection removes the gradient part of the result:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Advance.cpp
+   :language: cpp
+   :start-at: // Predictor:
+   :end-at: NodalProjection(vel_new, dt);
+   :dedent:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Advance.cpp
+   :language: cpp
+   :start-at: // Corrector:
+   :end-at: NodalProjection(vel_new, dt);
+   :dedent:
+
+For the advection term, the velocity is extrapolated to both sides of each
+face with limited slopes, one-sided next to walls:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Advection_K.H
+   :language: cpp
+   :start-at: void face_values
+   :end-before: // Normal velocity on a face
+
+The upwinded normal component gives a face velocity ``umac``. A MAC
+projection makes it divergence free: solve
+:math:`\nabla^2\phi = \nabla\cdot u_{mac}` on all levels and add the fluxes
+:math:`-\nabla\phi` from ``MLMG::getFluxes`` to ``umac``:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Projection.cpp
+   :language: cpp
+   :start-at: MLPoisson op(
+   :end-at: mlmg.solve(
+   :dedent:
+
+All velocity components are then upwinded with ``umac``, and the fluxes on
+faces covered by a finer level are replaced by the average of the fine
+fluxes, so that the update is conservative. The viscous term is applied with
+an ``MLABecLaplacian``, which handles the walls (Dirichlet values in the
+ghost cells) and coarse/fine boundaries:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Advance.cpp
+   :language: cpp
+   :start-at: MLABecLaplacian op(
+   :end-at: mlmg.apply(
+   :dedent:
+
+The nodal projection solves :math:`\nabla^2\phi = \nabla\cdot u` with
+:math:`\phi` on the nodes. Since the update has no pressure gradient,
+:math:`u = u_{div\,free} + \Delta t\,\nabla p`, so :math:`p = \phi/\Delta t`:
+
+.. literalinclude:: ../../Applications/IncFlow/Source/Projection.cpp
+   :language: cpp
+   :start-at: MLNodeLaplacian op(
+   :end-at: mlmg.solve(
+   :dedent:
+
+Making your own code
+^^^^^^^^^^^^^^^^^^^^
+
+- **New problem:** copy ``Exec/TaylorGreen`` to ``Exec/MyProblem``. Edit
+  ``prob_initdata`` in ``prob.H``, and the defaults and the check in
+  ``prob.cpp``. Add the problem to the list in ``CMakeLists.txt``.
+- **Wall velocity:** ``xlo.velocity``, ``yhi.velocity``, ... set the
+  velocity of the walls in non-periodic directions; the normal component is
+  zero.
+- **More physics:** a scalar can be advected like a velocity component in
+  ``ComputeAdvection``. Forces such as gravity are added to :math:`R` in
+  ``ComputeRHS``. Inflow and outflow need Dirichlet values in
+  ``WallVelocityFill`` and Dirichlet pressure boundaries in the
+  projections.
+
+Building and running
+^^^^^^^^^^^^^^^^^^^^
+
+One executable is built per problem: targets
+``Applications_IncFlow_<Problem>``, binaries ``IncFlow_<Problem>``:
+
+.. code-block:: console
+
+   cmake --build build --target Applications_IncFlow_TaylorGreen -j 8
+   cd build/Applications/IncFlow
+   mpiexec -n 2 ./IncFlow_TaylorGreen ../../../Applications/IncFlow/Exec/TaylorGreen/inputs
+
+As with CNS, the directory can be copied out and built on its own with
+CMake, and each problem directory has a ``GNUmakefile``. The ``inputs``
+files stop after 10 steps; remove ``max_step`` for a longer run, e.g.,
+the shear layers roll up by ``stop_time=1``, and ``stop_time=20`` brings
+the cavity close to steady state. The nodal
+projection needs ``amr.ref_ratio = 2``. Restart with
+``amr.restart=chk00005``.

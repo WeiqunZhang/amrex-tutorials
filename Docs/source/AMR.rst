@@ -8,8 +8,8 @@ ghost cells across levels, synchronizing levels with refluxing and
 averaging down, and, with ``AmrCore``, tagging, regridding and subcycling in
 time. Both run in 2D and 3D only and need no optional AMReX
 features. Build only this topic with ``-DAMReXTutorials_TOPICS=AMR``; see
-:doc:`GettingStarted`. For a complete code on ``Amr``/``AmrLevel``, see
-:ref:`applications-cns`.
+:doc:`GettingStarted`. For complete codes, see :ref:`applications-cns` on
+``Amr``/``AmrLevel`` and :ref:`applications-incflow` on ``AmrCore``.
 
 .. _amr-statichierarchy:
 

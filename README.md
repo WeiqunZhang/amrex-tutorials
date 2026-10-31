@@ -142,6 +142,7 @@ complete code to copy as the starting point of an application.
 | Tutorial | Level | What it shows |
 |---|---|---|
 | [CNS](Applications/CNS) | Blueprint | Compressible flow on `Amr`/`AmrLevel` with GPU support |
+| [IncFlow](Applications/IncFlow) | Blueprint | Incompressible flow on `AmrCore` with MAC and nodal projections: Taylor-Green, double shear layer, lid-driven cavity |
 
 ### BuildSystems: your own project
 

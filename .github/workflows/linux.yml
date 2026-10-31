@@ -201,12 +201,14 @@ jobs:
             -DMPIEXEC_PREFLAGS=--oversubscribe
         cmake --build build-tutorials -j 4
         ctest --test-dir build-tutorials --output-on-failure
-    - name: Standalone application
+    - name: Standalone applications
       run: |
-        cp -r Applications/CNS ${RUNNER_TEMP}/CNS
-        cmake -S ${RUNNER_TEMP}/CNS -B ${RUNNER_TEMP}/CNS/build \
-            -DFETCHCONTENT_SOURCE_DIR_AMREX=${RUNNER_TEMP}/amrex
-        cmake --build ${RUNNER_TEMP}/CNS/build -j 4
+        for app in CNS IncFlow; do
+          cp -r Applications/${app} ${RUNNER_TEMP}/${app}
+          cmake -S ${RUNNER_TEMP}/${app} -B ${RUNNER_TEMP}/${app}/build \
+              -DFETCHCONTENT_SOURCE_DIR_AMREX=${RUNNER_TEMP}/amrex
+          cmake --build ${RUNNER_TEMP}/${app}/build -j 4
+        done
 
   sundials:
     name: SUNDIALS

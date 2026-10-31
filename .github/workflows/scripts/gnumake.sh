@@ -15,6 +15,7 @@ AMR/AdvectionAmrCore
 EB/Poisson
 Particles/Basics
 Applications/CNS/Exec/Sod
+Applications/IncFlow/Exec/LidDrivenCavity
 BuildSystems/GNUMake/Exec
 "
 
